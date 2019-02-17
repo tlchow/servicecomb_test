@@ -1,0 +1,30 @@
+cse-config-order: 100
+
+APPLICATION_ID: bank
+service_description:
+  name: spring-boot-deposit.casa
+  version: 0.0.1
+
+servicecomb:
+  service:
+    registry:
+      address: http://localhost:30100
+    
+  highway:
+    address: 0.0.0.0:7082
+  rest:
+    address: 0.0.0.0:9082
+    
+  handler:
+    chain:
+      Provider:
+        default: tracing-provider, saga-provider
+        
+  accesslog:
+    enabled: true
+    pattern: "%h - - %t %r %s %B  %SCB-traceId"
+        
+  tracing:
+    collector:
+      address: http://127.0.0.1:9411
+        
